@@ -1,0 +1,38 @@
+!!python/object:anthology.journals.book.Book
+curpage: 0
+db: !!python/object:anthology.journals.database.config.DBCfg
+    db: ./db/test.db
+edition: First
+id: 0
+numpages: 500
+publisher: Big Books
+publishloc: Ellicott City, MD
+publishyear: 2021
+rating: 0
+timesread: 0
+title: A Book to Test the Book Class
+- !!python/object:anthology.journals.book.Author
+    country: Here In the World
+    db: &id001 !!python/object:anthology.journals.database.config.DBCfg
+        db: ./db/test.db
+    firstname: Terry
+    gender: Female
+    id: 0
+    lastname: Cotta
+    midname: J
+- !!python/object:anthology.journals.book.Author
+    country: Here In the World
+    db: *id001
+    firstname: Barry
+    gender: Female
+    id: 0
+    lastname: Winstor
+    midname: P
+- !!python/object:anthology.journals.book.Author
+    country: Here In the World
+    db: *id001
+    firstname: Tonsil
+    gender: Female
+    id: 0
+    lastname: McItus
+    midname: Cookie

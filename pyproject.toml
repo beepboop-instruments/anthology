@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "anthology"
+homepage = ""
+version = "0.0.1"
+description = "A note taking and organization app."
+authors = ["Tyler Huddleston <beepboopinstruments@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "anthology"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
