@@ -1,16 +1,21 @@
+"""
+Entry
+
+Text input classes and functions.
+
+"""
 
 # Package imports
 from __future__ import annotations
 from dataclasses import field
 from typing import List
+from textual import on
 from textual.app import ComposeResult
-from textual.containers import Horizontal, ScrollableContainer
-from textual.widgets import Static, Button
+from textual.containers import Horizontal, Vertical, ScrollableContainer
+from textual.widgets import Static, Button, Switch, Label, Select
 
 # Module imports
 from .common import AddButton, SubButton, SaveButton, LabelInput
-
-from icecream import ic
 
 class EntryForm(Static):
     """
@@ -30,7 +35,6 @@ class EntryForm(Static):
             )
     
     def compose(self) -> ComposeResult:
-
         # Parameters
         for p in self._params:
             yield LabelInput(label=p, pos=self._pos)
@@ -42,40 +46,55 @@ class EntryRow(Static):
     
     # The formatted input list
     _entryform: EntryForm
+    _select: Select
     _params: list
+    _selection: list
     
     # Add and subtract buttons
     _add: AddButton
     _sub: SubButton
     
-    # Button info
+    # ID info
     _title: str
     _pos: int
     
-    def __init__(self, params: list, title: str, pos: int):
+    def __init__(self, params: list, selection: list(tuple), title: str, pos: int):
         self._params = params
+        self._selection = selection
         self._title = title
         self._pos = pos
         super().__init__(
             id=f"{self._title}_{str(self._pos)}")
     
     def compose(self) -> ComposeResult:
+        #self._selection.insert(0, ("New", "New"))
         self._entryform = EntryForm(self._params, pos=self._pos, id=f"entry_{self._title}_{self._pos}")
+        self._select = Select(
+            self._selection,
+            prompt="New"
+        )
         self._add = AddButton(id=f"add_{self._title}_{str(self._pos)}")
         self._sub = SubButton(id=f"sub_{self._title}_{str(self._pos)}")
         
-        yield self._entryform
+        with Vertical(classes="common--entry-row"):
+            yield self._select
+            yield self._entryform
+            with Horizontal(classes="common--button-row"):
+                yield self._add
+                if self._pos > 0:
+                    yield self._sub
         
-        # Buttons
-        h_contain = Horizontal(
-            id=f"hor_{self._title}_{str(self._pos)}",
-            classes="common--button-row"
-        )
-        h_contain.compose_add_child(self._add)
-        if self._pos > 0:
-            h_contain.compose_add_child(self._sub)
-        
-        yield h_contain
+    @on(Select.Changed)
+    def select_changed(self, event: Select.Changed) -> None:
+        select = self.query_one("Select")
+        print(f"{self} : {self._select} : {select}")
+        print(self._select.styles)
+        print(select.styles)
+        entryform = self.query_one("EntryForm")
+        if event.value == None:
+            entryform.display = True
+        else:
+            entryform.display = False
 
 class EntryList(ScrollableContainer):
     """
@@ -85,15 +104,18 @@ class EntryList(ScrollableContainer):
     # Title of the entry section
     _title: str
     
+    # Parameters
     _params: list
+    _selection: list
     _rows: List = field(default_factory=EntryRow)
     _row_id: int
     
-    def __init__(self, title: str, params: list):
+    def __init__(self, title: str, params: list, selection: list(tuple)):
         self._title = title
         self._params = params
+        self._selection = selection
         self._row_id = 0
-        self._rows = [EntryRow(self._params, self._title, self._row_id)]
+        self._rows = [EntryRow(self._params, self._selection, self._title, self._row_id)]
         super().__init__(
             classes="common--entrylist"
             )
@@ -117,10 +139,10 @@ class EntryList(ScrollableContainer):
         if button_id[0:3] == "add":
             # add new row after the row where the add button was pressed
             self._row_id += 1
-            new_row = EntryRow(self._params, self._title, self._row_id)
+            new_row = EntryRow(self._params, self._selection, self._title, self._row_id)
             self._rows.append(new_row)
             self.mount(new_row, after=self.get_widget_by_id(row_id))
-            new_row.refresh()
+            new_row.scroll_visible()
         elif button_id[0:3] == "sub":
             # delete row where the sub button was pressed
             del_pos = int(button_id.split("_")[-1])

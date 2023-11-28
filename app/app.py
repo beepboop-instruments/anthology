@@ -18,7 +18,7 @@ import pytest
 # Module imports
 from .. import __version__
 from ..utility.info import APP_TITLE, APP_NAME, APP_DESC
-from ..tui.screens.entry_author import AuthorEntry
+from ..tui.screens.entry_book import AuthorEntry, BookEntry
 from ..journals.book import Author
 
 from ..database.config import DBCfg
@@ -42,16 +42,9 @@ class AnthologyTUI(App[None]):
     
     def compose(self) -> ComposeResult:
         yield Header()
-        yield AuthorEntry()
+        yield BookEntry(test_db)
         yield RichLog()
         yield Footer()
-        
-    def on_mount(self) -> None:
-        self.title = "Demo Entry Form App"
-        self.sub_title = "Testing"
-
-    def on_mount(self) -> None:
-        """Set up the application after the DOM is ready."""
 
 def get_args() -> Namespace:
     """Parse and return the command line arguments.

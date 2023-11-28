@@ -155,6 +155,14 @@ class DataTable(ABC):
         return [i[0] for i in db.cursor.fetchall()]
     
     @classmethod
+    def list_all(cls, db) -> list[str]:
+        """
+        Provide list of all items in the table.
+        """
+        logger.debug(f"Listing all items in {cls.__name__} table.")
+        return [str(cls.load(db, i)) for i in cls.load_column(db, "id")]
+
+    @classmethod
     def entry_params(cls) -> dict:
         """
         Format entry parameters by alias and attribute type.

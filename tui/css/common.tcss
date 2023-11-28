@@ -1,4 +1,20 @@
 
+Button {
+	min-width: 6;
+	height: 1;
+	border: none;
+	background: lemonchiffon;
+}
+
+Button:focus {
+	text-style: bold;
+	background: lightgreen;
+}
+
+Footer {
+	background: lightcoral;
+}
+
 Header {
 	border: heavy lemonchiffon;
 	text-style: bold;
@@ -6,8 +22,129 @@ Header {
 	margin-bottom: 2;
 }
 
-Footer {
-	background: lightcoral;
+Label {
+	color: lemonchiffon;
+}
+
+Select {
+	background: $background-lighten-1;
+	color: black;
+	border: none;
+}
+
+Select:focus > SelectCurrent {
+	border: none;
+	background: lightgreen;
+	color: black;
+}
+
+Select > SelectOverlay {
+	width: 1fr;
+	display: none;
+	height: auto;
+	max-height: 12;
+	overlay: screen;
+	constrain: y;
+}
+
+Select .up-arrow {
+	display: none;
+}
+
+Select.-expanded .down-arrow {
+	display: none;
+}
+
+Select.-expanded .up-arrow {
+	display: block;
+}
+
+Select.-expanded > SelectOverlay {
+	display: block;
+}
+
+Select.-expanded > SelectCurrent {
+	border: none;
+}
+
+SelectOverlay {
+	border: none;
+	background: lemonchiffon;
+	color: $background-lighten-1;
+	width: 100%;
+	padding: 0 1;
+}
+
+SelectOverlay:focus {
+	border: none;
+}
+
+SelectOverlay > .option-list--option {
+	padding: 0 1;
+}
+
+SelectCurrent {
+	border: none;
+	background: $background-lighten-1;
+	color: lemonchiffon;
+	width: 100%;
+	height: auto;
+	padding: 0 2;
+}
+
+SelectCurrent Static#label {
+	width: 1fr;
+	height: auto;
+	color: lemonchiffon;
+	background: transparent;
+}
+
+SelectCurrent.-has-value Static#label {
+	color: lemonchiffon;
+}
+
+SelectCurrent .arrow {
+	box-sizing: content-box;
+	width: 1;
+	height: 1;
+	padding: 0 0 0 1;
+	color: lemonchiffon;
+	background: transparent;
+}
+
+OptionList {
+	height: auto;
+	background: $background-lighten-1;
+	color: lemonchiffon;
+	overflow-x: hidden;
+	border: tall transparent;
+	padding: 0 1;
+}
+
+OptionList:focus {
+	border: none;
+	color: lemonchiffon;
+}
+
+OptionList:focus > .option-list--option-highlighted {
+	background: lightgreen;
+	color: black;
+}
+
+OptionList > .option-list--option-hover {
+	background: lemonchiffon;
+	color: black;
+}
+
+OptionList:focus > .option-list--option-hover-highlighted {
+	background: lightgreen;
+	color: black;
+	text-style: italic;
+}
+
+Switch {
+	height: 1;
+	border: none;
 }
 
 .common--title {
@@ -34,19 +171,7 @@ Footer {
 
 .common--input:focus {
 	background: lightgreen;
-	color: black 80%;
-}
-
-Button {
-	min-width: 6;
-	height: 1;
-	border: none;
-	background: lemonchiffon;
-}
-
-Button:focus {
-	text-style: bold;
-	background: lightgreen;
+	color: black;
 }
 
 .common--button {
@@ -63,15 +188,35 @@ Button:focus {
 	content-align: center middle;
 }
 
+.common--entry-row {
+	height: auto;
+}
+
 .common--horizontal {
 	height: auto;
 }
 
 .common--entryform {
-	padding-top: 1;
+	margin-top: 1;
 }
 
 .common--entrylist {
+	height: auto;
+	width: 1fr;
 	border: panel lemonchiffon;	
     border-title-style: bold;
+	padding: 1 2;
+}
+
+.common--right {
+	dock: right;
+}
+
+.entry-cols {
+	width: 1fr;
+}
+
+.hor-border {
+	border: solid lemonchiffon;
+	height: auto;
 }

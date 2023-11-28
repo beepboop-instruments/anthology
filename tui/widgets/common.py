@@ -23,7 +23,6 @@ class LabelInput(Horizontal):
         super().__init__(
             self._label,
             self._input,
-            id=f"LblIn_{label}_{self._pos}",
             classes="common--horizontal"
             )
         

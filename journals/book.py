@@ -51,6 +51,7 @@ class Book(Medium):
     :curpage:     current page
     :timesread:   the number of times the book was read
     :rating:      personal rating of the book
+    :formattype:  format of the book
     """
     title: str
     publisher: str
@@ -58,6 +59,7 @@ class Book(Medium):
     publishloc: str
     edition: str
     numpages: int
+    formattype: str
     curpage: int = 0
     timesread: int = 0
     rating: int = 0
@@ -69,17 +71,9 @@ class Book(Medium):
         return (
             f"{self.title} by {oxford_comma_list(self.author)}, {self.publishloc}, {self.publishyear}"
             )
-
-    @property
-    def unique_ids(self) -> list[tuple]:
-        """
-        Unique ID definition for a SQL database table.
-        """
-        return [('title', self.title),
-                ('edition', self.edition)]
     
-    @property
-    def lut(self) -> dict:
+    @classmethod
+    def lut(cls) -> dict:
         """
         Format attributes into dictionary as:
           { <attribute name> : (<name alias>, <attribute>, <attribute type>) }
@@ -91,10 +85,19 @@ class Book(Medium):
             'publishloc' :  ('Publish Location', str    ),
             'edition' :     ('Edition',          str    ),
             'numpages' :    ('Number of Pages',  int    ),
+            'formattype':   ('Format',           str    ),
             'curpage':      ('Current Page',     int    ),
             'timesread' :   ('Times Read',       int    ),
             'rating' :      ('Rating',           int    )
             }
+
+    @property
+    def unique_ids(self) -> list[tuple]:
+        """
+        Unique ID definition for a SQL database table.
+        """
+        return [('title', self.title),
+                ('edition', self.edition)]
 
     @property
     def author_ids(self) -> list[int]:
