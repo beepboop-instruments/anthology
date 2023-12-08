@@ -1,0 +1,168 @@
+database: "./db/test.db"
+
+book:
+    uut:
+        'title' : 'A Book to Test the Book Class'
+        'publisher' : 'Big Books'
+        'publishyear' : '2021'
+        'publishloc' : 'Ellicott City, MD'
+        'edition' : 'First'
+        'numpages' : 500
+        'curpage' : 123
+        'timesread' : 0
+        'rating' : 100
+        'formattype' : 'Book'
+    results:
+        lut_var_to_alias:
+            'curpage': 'Current Page'
+            'edition': 'Edition'
+            'formattype': 'Format'
+            'numpages': 'Number of Pages'
+            'publisher': 'Publisher'
+            'publishloc': 'Publish Location'
+            'publishyear': 'Publish Year'
+            'rating': 'Rating'
+            'timesread': 'Times Read'
+            'title': 'Title'
+        lut_var_to_type:
+            'curpage': 'int'
+            'edition': 'str'
+            'formattype': 'str'
+            'numpages': 'int'
+            'publisher': 'str'
+            'publishloc': 'str'
+            'publishyear': 'str'
+            'rating': 'float'
+            'timesread': 'int'
+            'title': 'str'
+        lut_var_to_desc:
+            'curpage': 'The current page of the book.'
+            'edition': 'The edition of the book.'
+            'formattype': 'The book format (print, ebook, audiobook, etc).'
+            'numpages': 'The number of pages in the book.'
+            'publisher': "The book' publisher."
+            'publishloc': 'The year the book was published.'
+            'publishyear': 'The year the book was published.'
+            'rating': 'Rating of the book.'
+            'timesread': 'The number of times the book was read.'
+            'title': 'The title of the book.'
+        lut_alias_to_var:
+            'Current Page': 'curpage'
+            'Edition': 'edition'
+            'Format': 'formattype'
+            'Number of Pages': 'numpages'
+            'Publish Location': 'publishloc'
+            'Publish Year': 'publishyear'
+            'Publisher': 'publisher'
+            'Rating': 'rating'
+            'Times Read': 'timesread'
+            'Title': 'title'
+        lut_alias_to_desc:
+            'Current Page': 'The current page of the book.'
+            'Edition': 'The edition of the book.'
+            'Format': 'The book format (print, ebook, audiobook, etc).'
+            'Number of Pages': 'The number of pages in the book.'
+            'Publish Location': 'The year the book was published.'
+            'Publish Year': 'The year the book was published.'
+            'Publisher': "The book' publisher."
+            'Rating': 'Rating of the book.'
+            'Times Read': 'The number of times the book was read.'
+            'Title': 'The title of the book.'
+        book_load_table:
+            - !!python/tuple
+                - 1
+                - A Book to Test the Book Class
+                - Big Books
+                - '2021'
+                - Ellicott City, MD
+                - First
+                - 500
+                - Book
+                - 123
+                - 0
+                - 100
+        authors_load_table:
+            - !!python/tuple
+                - 1
+                - Terry
+                - Cotta
+                - J
+                - Female
+                - Here In the World
+            - !!python/tuple
+                - 2
+                - Barry
+                - Winstor
+                - P
+                - Female
+                - Here In the World
+            - !!python/tuple
+                - 3
+                - Tonsil
+                - McItus
+                - Cookie
+                - Female
+                - Here In the World
+        book_authors_load_table:
+            - !!python/tuple
+                - 1
+                - 1
+            - !!python/tuple
+                - 2
+                - 1
+            - !!python/tuple
+                - 3
+                - 1
+
+
+authors:
+    uut:
+        terry:
+            'firstname' : 'Terry'
+            'lastname' : 'Cotta'
+            'midname' : 'J'
+            'gender' : 'Female'
+            'country' : 'Here In the World'
+        barry:
+            'firstname' : 'Barry'
+            'lastname' : 'Winstor'
+            'midname' : 'P'
+            'gender' : 'Female'
+            'country' : 'Here In the World'
+        tonsil:
+            'firstname' : 'Tonsil'
+            'lastname' : 'McItus'
+            'midname' : 'Cookie'
+            'gender' : 'Female'
+            'country' : 'Here In the World'
+    results:
+        lut_var_to_alias:
+            'country': 'Country'
+            'firstname': 'First Name'
+            'gender': 'Gender'
+            'lastname': 'Last Name'
+            'midname': 'Middle Name'
+        lut_var_to_type:
+            'country': 'str'
+            'firstname': 'str'
+            'gender': 'str'
+            'lastname': 'str'
+            'midname': 'str'
+        lut_var_to_desc:
+            'country': "The creator's country of origin."
+            'firstname': "The creator's first name."
+            'gender': "The creator's gender."
+            'lastname': "The creator's last name."
+            'midname': "The creator's middle name."
+        lut_alias_to_var:
+            'Country': 'country'
+            'First Name': 'firstname'
+            'Gender': 'gender'
+            'Last Name': 'lastname'
+            'Middle Name': 'midname'
+        lut_alias_to_desc:
+            'Country': "The creator's country of origin."
+            'First Name': "The creator's first name."
+            'Gender': "The creator's gender."
+            'Last Name': "The creator's last name."
+            'Middle Name': "The creator's middle name."

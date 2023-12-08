@@ -1,0 +1,44 @@
+database: "./db/test.db"
+
+reading_session:
+    uut:
+        start_time: 2021-09-21 23:59:59
+        end_time: 2021-09-22 01:02:03
+        start_page: 123
+        end_page: 456
+        source_type: "Book"
+        _source_id: 1
+        _quotes: []
+    results:
+        lut_alias_to_var:
+            'End Page': 'end_page'
+            'End Time': 'end_time'
+            'Format': 'source_type'
+            'Start Page': 'start_page'
+            'Start Time': 'start_time'
+        lut_var_to_alias:
+            'end_page': 'End Page'
+            'end_time': 'End Time'
+            'source_type': 'Format'
+            'start_page': 'Start Page'
+            'start_time': 'Start Time'
+        lut_var_to_type:
+            'end_page': 'int'
+            'end_time': 'datetime'
+            'source_type': 'str'
+            'start_page': 'int'
+            'start_time': 'datetime'
+        lut_var_to_desc:
+            'end_page': 'The last page read druing the session.'
+            'end_time': 'The session end date and time.'
+            'source_type': 'The media format.'
+            'start_page': 'The first page read during the session.'
+            'start_time': 'The session start date and time.'
+        lut_alias_to_desc:
+            'End Page': 'The last page read druing the session.'
+            'End Time': 'The session end date and time.'
+            'Format': 'The media format.'
+            'Start Page': 'The first page read during the session.'
+            'Start Time': 'The session start date and time.'
+        duration: "1 hr & 2 mins"
+        num_pages_read: 333

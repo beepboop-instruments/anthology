@@ -5,7 +5,7 @@ Data Table Module
 
 # Library imports
 from typing      import List, Any
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from abc         import ABC, abstractmethod
 from loguru      import logger
 
@@ -161,15 +161,6 @@ class DataTable(ABC):
         """
         logger.debug(f"Listing all items in {cls.__name__} table.")
         return [str(cls.load(db, i)) for i in cls.load_column(db, "id")]
-
-    @classmethod
-    def entry_params(cls) -> dict:
-        """
-        Format entry parameters by alias and attribute type.
-        """
-        keys = list(cls.lut().keys())
-        vals = [i[0] for i in cls.lut().values()]
-        return { k:v for k, v in zip(keys, vals) }
  
     def save(self, update=True):
         """
@@ -227,21 +218,35 @@ class DataTable(ABC):
     def unique_str(self) -> str:
         return f"UNIQUE ({', '.join([i[0] for i in self.unique_ids])})"
     
-    @abstractmethod
-    def lut(self) -> dict:
-        pass
+    @classmethod
+    def lut_aliases(cls) -> list:
+        """Return a list of formal print names."""
+        return [f.metadata['name'] for f in fields(cls) if f.metadata]
+
+    @classmethod
+    def lut_alias_to_var(cls) -> dict:
+        """Return a dictionary of formal print names to field names."""
+        return { f.metadata['name'] : f.name for f in fields(cls) if f.metadata }
     
-    @property
-    def lut_alias_to_name(self) -> dict:
-        return { v[0] : k for k, v in self.lut().items() }
+    @classmethod
+    def lut_alias_to_desc(cls) -> dict:
+        """Return a dictionary of formal print names to field descriptions."""
+        return { f.metadata['name'] : f.metadata['desc'] for f in fields(cls) if f.metadata }
     
-    @property
-    def lut_name_to_alias(self) -> dict:
-        return { k : v[0] for k, v in self.lut().items() }
+    @classmethod
+    def lut_var_to_alias(cls) -> dict:
+        """Return a dictionary of field names to formal print names."""
+        return { f.name : f.metadata['name'] for f in fields(cls) if f.metadata }
     
-    @property
-    def lut_name_to_type(self) -> dict:
-        return { v[0] : self.eval(v[1]) for v in self.lut().values() }
+    @classmethod
+    def lut_var_to_type(cls) -> dict:
+        """Return a dictionary of field names to field types."""
+        return { f.name : f.type.__name__ for f in fields(cls) if f.metadata }
+    
+    @classmethod
+    def lut_var_to_desc(cls) -> dict:
+        """Return a dictionary of field names to field descriptions."""
+        return { f.name : f.metadata['desc'] for f in fields(cls) if f.metadata }
 
 # --------------------------------------------------------------------
 # RelTable Class -----------------------------------------------------

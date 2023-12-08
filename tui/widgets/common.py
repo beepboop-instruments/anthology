@@ -8,16 +8,14 @@ class LabelInput(Horizontal):
 
     _label: Label
     _input: Input
-    _pos: int
     
-    def __init__(self, label:str, pos:int, width:int=50):
-        self._pos = pos
+    def __init__(self, label:str, id:str):
         self._label = Label(
             label,
             classes="common--label"
             )
         self._input = Input(
-            id=f"in_{label.replace(' ','')}_{pos}",
+            id=id,
             classes="common--input"
             )
         super().__init__(
@@ -49,8 +47,9 @@ class SubButton(Button):
 class SaveButton(Button):
     """A basic Save button."""
     
-    def __init__(self) -> None:
+    def __init__(self, id) -> None:
         super().__init__(
+            id=id,
             label="Save",
             classes="common--button"
         )

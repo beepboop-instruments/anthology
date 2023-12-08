@@ -12,7 +12,7 @@ from typing import List
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical, ScrollableContainer
-from textual.widgets import Static, Button, Switch, Label, Select
+from textual.widgets import Static, Button, Select
 
 # Module imports
 from .common import AddButton, SubButton, SaveButton, LabelInput
@@ -25,19 +25,21 @@ class EntryForm(Static):
     # List of entry parameters
     _params: list
     _pos: int
+    _title: str
     
-    def __init__(self, params: list, pos: int, id: str):
+    def __init__(self, title: str, params: list, pos: int):
         self._params = params
         self._pos = pos
+        self._title = title
         super().__init__(
-            id=id,
             classes="common--entryform"
             )
     
     def compose(self) -> ComposeResult:
         # Parameters
         for p in self._params:
-            yield LabelInput(label=p, pos=self._pos)
+            id_li = f"{self._title }_{p.replace(' ','')}_{self._pos}"
+            yield LabelInput(label=p, id=id_li)
 
 class EntryRow(Static):
     """
@@ -68,7 +70,7 @@ class EntryRow(Static):
     
     def compose(self) -> ComposeResult:
         #self._selection.insert(0, ("New", "New"))
-        self._entryform = EntryForm(self._params, pos=self._pos, id=f"entry_{self._title}_{self._pos}")
+        self._entryform = EntryForm(self._title, self._params, pos=self._pos)
         self._select = Select(
             self._selection,
             prompt="New"
@@ -86,10 +88,6 @@ class EntryRow(Static):
         
     @on(Select.Changed)
     def select_changed(self, event: Select.Changed) -> None:
-        select = self.query_one("Select")
-        print(f"{self} : {self._select} : {select}")
-        print(self._select.styles)
-        print(select.styles)
         entryform = self.query_one("EntryForm")
         if event.value == None:
             entryform.display = True

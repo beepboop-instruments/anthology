@@ -43,7 +43,6 @@ class AnthologyTUI(App[None]):
     def compose(self) -> ComposeResult:
         yield Header()
         yield BookEntry(test_db)
-        yield RichLog()
         yield Footer()
 
 def get_args() -> Namespace:

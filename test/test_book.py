@@ -1,15 +1,15 @@
-from datetime import date
 from icecream import ic
-import unittest, pytest, yaml, json
+import unittest, pytest, yaml, os
 
 # Library imports
-from datetime import datetime, timedelta
+from dataclasses import fields
 
 # UUT import
 from anthology.journals.book import Book, Author, BookAuthor
 from anthology.database.config import DBCfg
-        
-test_db = DBCfg("./db/test.db")
+
+# Test data file containing UUT test parameters and expected results
+FILE_UUT_SESSION = "./anthology/test/uut_book.yaml"
 
 # --------------------------------------------------------------------
 # Helper functions ---------------------------------------------------
@@ -38,69 +38,105 @@ def save_load_check(self, cls, obj) -> None:
 # Test sequence ------------------------------------------------------
 
 class TestBook(unittest.TestCase):
+    """Test the Book class."""
+    
+    def __init__(self, *args, **kwargs):
+        super(TestBook, self).__init__(*args, **kwargs)
+        with open(FILE_UUT_SESSION, 'r') as f:
+            self.uut = yaml.unsafe_load(f)
+            self.test_db = DBCfg(self.uut["database"])
+            # Initialize the Book UUT
+            self.book = Book(db=self.test_db, **self.uut["book"]["uut"])
+            # Initialize the Author list UUT
+            self.authors = [Author(db=self.test_db, **params) for params in self.uut["authors"]["uut"].values()]
+    
+    def test_metadata_book(self):
+        """Test the expected metadata and look-up-table functions."""
+        self.assertEqual(
+            Book.lut_var_to_alias(),
+            self.uut["book"]["results"]["lut_var_to_alias"],
+            msg=f"Unexpected look-up-table field name to alias!"
+        )
+        self.assertEqual(
+            Book.lut_var_to_type(),
+            self.uut["book"]["results"]["lut_var_to_type"],
+            msg=f"Unexpected look-up-table field name to type!"
+        )
+        self.assertEqual(
+            Book.lut_var_to_desc(),
+            self.uut["book"]["results"]["lut_var_to_desc"],
+            msg=f"Unexpected look-up-table field name to description!")
+        self.assertEqual(
+            Book.lut_alias_to_var(),
+            self.uut["book"]["results"]["lut_alias_to_var"],
+            msg=f"Unexpected look-up-table alias to field name!"
+        )
+        self.assertEqual(
+            Book.lut_alias_to_desc(),
+            self.uut["book"]["results"]["lut_alias_to_desc"],
+            msg=f"Unexpected look-up-table alias to description!"
+        )
+        
+    def test_metadata_authors(self):
+        """Test the expected metadata and look-up-table functions."""
+        self.assertEqual(
+            Author.lut_var_to_alias(),
+            self.uut["authors"]["results"]["lut_var_to_alias"],
+            msg=f"Unexpected look-up-table field name to alias!"
+        )
+        self.assertEqual(
+            Author.lut_var_to_type(),
+            self.uut["authors"]["results"]["lut_var_to_type"],
+            msg=f"Unexpected look-up-table field name to type!"
+        )
+        self.assertEqual(
+            Author.lut_var_to_desc(),
+            self.uut["authors"]["results"]["lut_var_to_desc"],
+            msg=f"Unexpected look-up-table field name to description!")
+        self.assertEqual(
+            Author.lut_alias_to_var(),
+            self.uut["authors"]["results"]["lut_alias_to_var"],
+            msg=f"Unexpected look-up-table alias to field name!"
+        )
+        self.assertEqual(
+            Author.lut_alias_to_desc(),
+            self.uut["authors"]["results"]["lut_alias_to_desc"],
+            msg=f"Unexpected look-up-table alias to description!"
+        )
 
-    def test_book(self):
+    def test_book_save(self):
         """
         Define a new Book, store it in the databae, load it from the
         database, and check equality.
         """
 
-        BookAuthor.create(test_db)
+        BookAuthor.create(self.test_db)
 
-        # define a new Author object
-        uut_author = [
-            Author(
-            db = test_db,
-            firstname = "Terry",
-            lastname = "Cotta",
-            midname = "J",
-            gender = "Female",
-            country = "Here In the World"
-            ),
-            Author(
-            db = test_db,
-            firstname = "Barry",
-            lastname = "Winstor",
-            midname = "P",
-            gender = "Female",
-            country = "Here In the World"
-            ),
-            Author(
-            db = test_db,
-            firstname = "Tonsil",
-            lastname = "McItus",
-            midname = "Cookie",
-            gender = "Female",
-            country = "Here In the World"
-            )
-            ]
         # save and load it from database
-        for a in uut_author:
+        for a in self.authors:
             save_load_check(self, Author, a)
         
-        # define new Book object
-        uut_book = Book(
-            db = test_db,
-            title = "A Book to Test the Book Class",
-            publisher = "Big Books",
-            publishyear = 2021,
-            publishloc = "Ellicott City, MD",
-            edition = "First",
-            numpages = 500
-            )
         # save and load it from database
-        save_load_check(self, Book, uut_book)
+        save_load_check(self, Book, self.book)
         
         # assign authors to a book
-        if uut_book.id:
-            for a in uut_author:
-                BookAuthor(test_db).save((a.id, uut_book.id))
-        
-        ic(Book.load_table(test_db))
-        ic(Author.load_table(test_db))
-        ic(BookAuthor.load_table(test_db))
-        
-        ic(uut_book.__match_args__)
+        if self.book.id:
+            for a in self.authors:
+                BookAuthor(self.test_db).save((a.id, self.book.id))
+
+        # test the database load table functions
+        self.assertEqual(
+            Book.load_table(self.test_db),
+            self.uut["book"]["results"]["book_load_table"],
+            msg=f"Unexpected data loaded from database!")
+        self.assertEqual(
+            Author.load_table(self.test_db),
+            self.uut["book"]["results"]["authors_load_table"],
+            msg=f"Unexpected data loaded from database!")
+        self.assertEqual(
+            BookAuthor.load_table(self.test_db),
+            self.uut["book"]["results"]["book_authors_load_table"],
+            msg=f"Unexpected data loaded from database!")
 
 
 if __name__ == '__main__':

@@ -21,10 +21,6 @@ class Medium(DataTable, ABC):
         pass
 
     @abstractmethod
-    def readable_dict(self):
-        pass
-
-    @abstractmethod
     def store_entry(self):
         pass
 
@@ -41,28 +37,24 @@ class Creator(DataTable, ABC):
     :gender:     creator's gender
     :country:    creator's country of association
     """
-    firstname: str = ""
-    lastname: str = ""
-    midname: str = ""
-    gender: str = ""
-    country: str = ""
+    firstname: str = field(default="", metadata={
+        'name': 'First Name',
+        'desc': 'The creator\'s first name.'})
+    lastname: str = field(default="", metadata={
+        'name': 'Last Name',
+        'desc': 'The creator\'s last name.'})
+    midname: str = field(default="", metadata={
+        'name': 'Middle Name',
+        'desc': 'The creator\'s middle name.'})
+    gender: str = field(default="", metadata={
+        'name': 'Gender',
+        'desc': 'The creator\'s gender.'})
+    country: str = field(default="", metadata={
+        'name': 'Country',
+        'desc': 'The creator\'s country of origin.'})
     
     def __str__(self):
         return self.last_first
-    
-    @classmethod
-    def lut(cls) -> dict:
-        """
-        Format attributes into dictionary as:
-          { <attribute name> : (<name alias>, <attribute>, <attribute type>) }
-        """
-        return {
-            'firstname' : ('First Name',  str ),
-            'midname' :   ('Middle Name', str ),
-            'lastname' :  ('Last Name',   str ),
-            'gender' :    ('Gender',      str ),
-            'country' :   ('Country',     str )
-            }
 
     @property
     def unique_ids(self) -> list[tuple]:
