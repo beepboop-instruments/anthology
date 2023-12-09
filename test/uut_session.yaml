@@ -42,3 +42,161 @@ reading_session:
             'Start Time': 'The session start date and time.'
         duration: "1 hr & 2 mins"
         num_pages_read: 333
+        reading_load_table:
+            - !!python/tuple
+                - 1
+                - '2021-09-21 23:59:59'
+                - '2021-09-22 01:02:03'
+                - 123
+                - 456
+                - Book
+                - 1
+                - '[]'
+        reading_quote:
+            - !!python/tuple
+                - 1
+                - 1
+            - !!python/tuple
+                - 2
+                - 1
+            - !!python/tuple
+                - 3
+                - 1
+
+quotes:
+    uut:
+        quote0:
+            excerpt: >
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim diam in mi sollicitudin vulputate. Suspendisse potenti. Vivamus massa turpis, viverra ac auctor vel, rhoncus id erat. Donec tempor ut augue sed consequat. Sed vel fermentum erat. Sed elementum erat in leo laoreet, eget iaculis nisl ornare. Donec porttitor tristique lorem, in aliquet erat condimentum quis.
+        
+                Ut et nisi ut arcu rutrum tristique at eu eros. Morbi ut rhoncus lectus, id luctus neque. Integer non lectus eget urna blandit semper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean luctus porttitor sapien, eu elementum eros dictum id. Proin consequat euismod quam, quis tristique lacus dapibus id. Sed bibendum elit nisl, in fringilla tellus tincidunt id. Suspendisse et libero non orci sollicitudin bibendum. Aenean a venenatis leo. Etiam ut ex urna.
+        
+                Nulla vehicula pellentesque augue non finibus. Morbi non interdum elit. In scelerisque sodales euismod. Curabitur nec accumsan odio. Aliquam erat volutpat. Quisque nec placerat ligula. Aliquam vel venenatis eros. Vivamus laoreet at nulla sed hendrerit.
+        
+                Nunc lacinia tincidunt est, vitae fermentum enim laoreet in. Maecenas efficitur viverra vestibulum. Integer varius orci in sagittis tempor. Fusce viverra elementum imperdiet. Pellentesque efficitur fermentum dui, sit amet vulputate velit sollicitudin vitae. Mauris ut iaculis lectus. Morbi vel sapien ultrices, dapibus odio eget, consequat justo. Suspendisse potenti. Quisque bibendum velit sit amet ligula sollicitudin pulvinar. Pellentesque volutpat sodales consequat. Sed condimentum sapien velit, et volutpat erat laoreet vel. Duis et lacus quam. Sed nec ante sodales, sollicitudin enim at, condimentum neque. Maecenas ac nisl dapibus mi porttitor egestas sit amet tincidunt enim.
+        
+                Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            pagenum: 22
+            response: >
+                "Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            sourcetype: "Book"
+        quote1:
+            excerpt: >
+                "Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            pagenum: 456
+            response: >
+                "Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            sourcetype: "Book"
+        quote2:
+            excerpt: >
+                "Nulla vehicula pellentesque augue non finibus. Morbi non interdum elit. In scelerisque sodales euismod. Curabitur nec accumsan odio. Aliquam erat volutpat. Quisque nec placerat ligula. Aliquam vel venenatis eros. Vivamus laoreet at nulla sed hendrerit.
+        
+                Nunc lacinia tincidunt est, vitae fermentum enim laoreet in. Maecenas efficitur viverra vestibulum. Integer varius orci in sagittis tempor. Fusce viverra elementum imperdiet. Pellentesque efficitur fermentum dui, sit amet vulputate velit sollicitudin vitae. Mauris ut iaculis lectus. Morbi vel sapien ultrices, dapibus odio eget, consequat justo. Suspendisse potenti. Quisque bibendum velit sit amet ligula sollicitudin pulvinar. Pellentesque volutpat sodales consequat. Sed condimentum sapien velit, et volutpat erat laoreet vel. Duis et lacus quam. Sed nec ante sodales, sollicitudin enim at, condimentum neque. Maecenas ac nisl dapibus mi porttitor egestas sit amet tincidunt enim.
+        
+                Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            pagenum: 123
+            response: >
+                "Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam. Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus, id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a, pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+            sourcetype: "Magazine"
+    results:
+        - !!python/tuple
+            - 1
+            - '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim diam
+              in mi sollicitudin vulputate. Suspendisse potenti. Vivamus massa turpis, viverra
+              ac auctor vel, rhoncus id erat. Donec tempor ut augue sed consequat. Sed vel fermentum
+              erat. Sed elementum erat in leo laoreet, eget iaculis nisl ornare. Donec porttitor
+              tristique lorem, in aliquet erat condimentum quis.
+              
+              Ut et nisi ut arcu rutrum tristique at eu eros. Morbi ut rhoncus lectus, id luctus
+              neque. Integer non lectus eget urna blandit semper. Interdum et malesuada fames
+              ac ante ipsum primis in faucibus. Aenean luctus porttitor sapien, eu elementum
+              eros dictum id. Proin consequat euismod quam, quis tristique lacus dapibus id.
+              Sed bibendum elit nisl, in fringilla tellus tincidunt id. Suspendisse et libero
+              non orci sollicitudin bibendum. Aenean a venenatis leo. Etiam ut ex urna.
+
+              Nulla vehicula pellentesque augue non finibus. Morbi non interdum elit. In scelerisque
+              sodales euismod. Curabitur nec accumsan odio. Aliquam erat volutpat. Quisque nec
+              placerat ligula. Aliquam vel venenatis eros. Vivamus laoreet at nulla sed hendrerit.
+
+              Nunc lacinia tincidunt est, vitae fermentum enim laoreet in. Maecenas efficitur
+              viverra vestibulum. Integer varius orci in sagittis tempor. Fusce viverra elementum
+              imperdiet. Pellentesque efficitur fermentum dui, sit amet vulputate velit sollicitudin
+              vitae. Mauris ut iaculis lectus. Morbi vel sapien ultrices, dapibus odio eget,
+              consequat justo. Suspendisse potenti. Quisque bibendum velit sit amet ligula sollicitudin
+              pulvinar. Pellentesque volutpat sodales consequat. Sed condimentum sapien velit,
+              et volutpat erat laoreet vel. Duis et lacus quam. Sed nec ante sodales, sollicitudin
+              enim at, condimentum neque. Maecenas ac nisl dapibus mi porttitor egestas sit
+              amet tincidunt enim.
+
+              Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - 22
+            - '"Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - Book
+        - !!python/tuple
+            - 2
+            - '"Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - 456
+            - '"Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - Book
+        - !!python/tuple
+            - 3
+            - '"Nulla vehicula pellentesque augue non finibus. Morbi non interdum elit. In scelerisque
+              sodales euismod. Curabitur nec accumsan odio. Aliquam erat volutpat. Quisque nec
+              placerat ligula. Aliquam vel venenatis eros. Vivamus laoreet at nulla sed hendrerit.
+
+              Nunc lacinia tincidunt est, vitae fermentum enim laoreet in. Maecenas efficitur
+              viverra vestibulum. Integer varius orci in sagittis tempor. Fusce viverra elementum
+              imperdiet. Pellentesque efficitur fermentum dui, sit amet vulputate velit sollicitudin
+              vitae. Mauris ut iaculis lectus. Morbi vel sapien ultrices, dapibus odio eget,
+              consequat justo. Suspendisse potenti. Quisque bibendum velit sit amet ligula sollicitudin
+              pulvinar. Pellentesque volutpat sodales consequat. Sed condimentum sapien velit,
+              et volutpat erat laoreet vel. Duis et lacus quam. Sed nec ante sodales, sollicitudin
+              enim at, condimentum neque. Maecenas ac nisl dapibus mi porttitor egestas sit
+              amet tincidunt enim.
+
+              Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - 123
+            - '"Etiam eget quam magna. Cras vitae ipsum a libero blandit dignissim at vel quam.
+              Donec auctor erat sit amet metus sagittis commodo. Maecenas ut ultricies lectus,
+              id efficitur metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Suspendisse potenti. Nam eros nibh, congue id cursus a,
+              pellentesque nec orci. Phasellus in efficitur ante, a pharetra purus. Sed eu tincidunt
+              arcu. Praesent tincidunt magna a dolor tincidunt, eget vulputate tellus aliquam."
+
+              '
+            - Magazine

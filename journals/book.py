@@ -133,17 +133,21 @@ class BookAuthor(MediumCreator):
     
     @classmethod
     def get_book_author_ids(cls, book_id:int, db) -> list[int]:
+        """Return a list of author ids associated with a book id."""
         return cls.get_creator_ids(book_id, db)
     
     @classmethod
     def get_book_authors(cls, book_id:int, db) -> list[str]:
+        """Return a list of author names associated with a book id."""
         return [Author.load(db, i).first_last for i in cls.get_book_author_ids(book_id, db)]
     
     @classmethod
     def get_author_book_ids(cls, author_id:int, db) -> list[int]:
+        """Return a list of book ids associated with an author id."""
         return cls.get_media_ids(author_id, db)
     
     @classmethod
     def get_author_books(cls, author_id:int, db) -> list[str]:
+        """Return a list of book names associated with an author id."""
         return [Book.load(db, i).title for i in cls.get_author_book_ids(author_id, db)]
     

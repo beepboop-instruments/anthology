@@ -1,7 +1,7 @@
 """
 Author Entry
 
-A class for author infor input.
+A class for author info input.
 
 """
 

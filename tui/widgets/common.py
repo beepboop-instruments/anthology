@@ -23,7 +23,7 @@ class LabelInput(Horizontal):
             self._input,
             classes="common--horizontal"
             )
-        
+
 class AddButton(Button):
     """A basic + button."""
     
@@ -33,7 +33,7 @@ class AddButton(Button):
             id=id,
             classes="common--add-sub"
         )
-        
+
 class SubButton(Button):
     """A basic - button."""
     
@@ -53,4 +53,3 @@ class SaveButton(Button):
             label="Save",
             classes="common--button"
         )
-

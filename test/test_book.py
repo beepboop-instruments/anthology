@@ -106,7 +106,7 @@ class TestBook(unittest.TestCase):
 
     def test_book_save(self):
         """
-        Define a new Book, store it in the databae, load it from the
+        Define a new Book, store it in the database, load it from the
         database, and check equality.
         """
 

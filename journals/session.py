@@ -33,8 +33,10 @@ class Quote(DataTable):
     sourcetype: str = field(metadata={
         'name': 'Media Format',
         'desc': 'The media format of the quoted source.'})
-    _source_id: int
-    _category: list[Category] = field(default_factory=Category)
+    
+    @property
+    def unique_ids(self) -> list[tuple]:
+        return [('excerpt', self.excerpt)]
 
 @dataclass
 class Note(DataTable):
@@ -43,7 +45,7 @@ class Note(DataTable):
 @dataclass
 class Session(DataTable):
     """
-    A session defines a single occasion of obtaining  information.
+    A session defines a single occasion of obtaining information.
     
     A session at minimum consists of:
     :start_time:   session start date and time
@@ -107,7 +109,8 @@ class Reading(Session):
     
     @property
     def unique_ids(self) -> list[tuple]:
-        return [(None,None)]
+        return [('start_time', self.start_time),
+                ('end_time', self.end_time)]
     
     @property
     def num_pages_read(self) -> int:
@@ -126,3 +129,32 @@ class Watching(Session):
     """
     pass
 
+# --------------------------------------------------------------------
+# Readings <-> Quotes Class ------------------------------------------
+
+@dataclass
+class ReadingQuote(RelTable):
+    """Many to many intermediate table to map readings and quotes."""
+    a_name = "reading"
+    b_name = "quote"
+    table_name = "readings_quotes"
+    
+    @classmethod
+    def get_reading_quote_ids(cls, reading_id:int, db) -> list[int]:
+        """Return a list of quote ids associated with a reading id."""
+        return cls.lookup_rel_ids(db, reading_id, ("b","a"))
+    
+    @classmethod
+    def get_reading_quotes(cls, reading_id:int, db) -> list[str]:
+        """Return a list of quotes associated with a reading id."""
+        return [Quote.load(db, i) for i in cls.get_reading_quote_ids(reading_id, db)]
+    
+    @classmethod
+    def get_quote_reading_ids(cls, quote_id:int, db) -> list[int]:
+        """Return a list of reading ids associated with a quote id."""
+        return cls.lookup_rel_ids(db, quote_id, ("a","b"))
+    
+    @classmethod
+    def get_quote_readings(cls, quote_id:int, db) -> list[str]:
+        """Return a list of readings associated with a quote id."""
+        return [Reading.load(db, i).title for i in cls.get_quote_reading_ids(quote_id, db)]

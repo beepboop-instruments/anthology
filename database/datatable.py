@@ -8,12 +8,28 @@ from typing      import List, Any
 from dataclasses import dataclass, field, fields
 from abc         import ABC, abstractmethod
 from loguru      import logger
+import datetime
 
 # Module imports
 from .config     import DBCfg
 
+SQL_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+
 # --------------------------------------------------------------------
 # Helper functions ---------------------------------------------------
+
+def is_date(string):
+    """
+    Return whether the string can be interpreted as a date.
+
+    :param string: str, string to check for date
+    """
+    try: 
+        datetime.datetime.strptime(string, SQL_DATE_FORMAT)
+        return True
+
+    except ValueError:
+        return False
 
 def params_to_str(params:dict) -> str:
     """
@@ -25,6 +41,8 @@ def params_to_str(params:dict) -> str:
         param_str += f"{p} = "
         if isinstance(params[p], (int, bool, float)):
             param_str += f"{params[p]}, "
+        elif isinstance(p, (datetime.datetime)):
+            param_str += f"\'{str(params[p])}\',"
         else:
             param_str += f"\'{params[p]}\', "
     
@@ -46,6 +64,8 @@ def get_sql_type(var:Any) -> str:
                             range, set, frozenset, bytes,
                             bytearray, memoryview) ):
         return "TEXT"
+    elif isinstance(var, (datetime.datetime)):
+        return "DATETIME"
     else:
         logger.error(f"Unknown data type for SQL translation! {type(var)} : {var}")
         return "NULL"
@@ -61,7 +81,7 @@ def get_sql_value(var:Any) -> Any:
         return int(var)
     elif isinstance(var, float):
         return var
-    elif isinstance(var, (complex, str, list)):
+    elif isinstance(var, (complex, str, list, datetime.datetime)):
         return str(var)
     else:
         logger.error(f"Unknown data type for SQL translation! {type(var)} : {var}")
@@ -91,7 +111,8 @@ class DataTable(ABC):
                 pass
             else:
                 cols += f"{i} {get_sql_type(self.__dict__[i])}, "
-        cols += f"{self.unique_str}, "
+        if self.unique_ids[0][0]:
+            cols += f"{self.unique_str}, "
 
         sql = f"""CREATE TABLE IF NOT EXISTS {self.__class__.__name__}s({cols[:-2]});"""
 
@@ -127,6 +148,8 @@ class DataTable(ABC):
         for i in row:
             if isinstance(i, str) and i[0] == '[':
                 params.append(eval(i))
+            elif isinstance(i, str) and is_date(i):
+                params.append(datetime.datetime.strptime(i, SQL_DATE_FORMAT))
             else:
                 params.append(i)
         obj = cls(*params[:])
