@@ -3,8 +3,7 @@ import sqlite3
 
 @dataclass
 class DBCfg():
-    """
-    Database configuration object.
+    """Database configuration object.
     
     User-defined parameters:
     :db: the database location.
